@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        body{
+            /* background-color: rgb(202, 202, 202); */
+            background: url('./img/1325254.png');
+            background-size: auto;
+            background-position: 50% 50%;
+        }
+        canvas{
+            border: 3px solid rgb(24, 24, 24);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #tabbleControls td{
+            padding: 5px;
+        }
+        #tabbleControls{
+            margin: 20px;
+            border-collapse: collapse;
+            border: 2px solid black;
+        }
+        #tabbleControls td{
+            border: 3px solid black;
+        }
+        #tabbleControls #row,
+        #tabbleControls #col{
+            width: 100px;
+        }
+        #tabbleControls input{
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <canvas></canvas>
+    <table id="tabbleControls" border="2px">
+        <thead>
+            <td colspan="2"><h3>Menu Controls</h3></td>
+        </thead>
+        <tbody>
+            <tr>
+                <td><label for="row">Số hàng</label></td>
+                <td><label for="col">Số cột</label></td>
+            </tr>
+            <tr>
+                <td><input type="number" name="row" id="row" value="5"></td>
+                <td><input type="number" name="col" id="col" value="5"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="Create" onclick="init()"></td>
+                <td><input type="button" value="Run" onclick="RunDfs()"></td>
+            </tr>
+        </tbody>
+    </table>    
+
+    <!-- <input type="" id="x">
+    <input type="" id="y"> -->
+    <script src="index.js"></script>
+</body>
+</html>

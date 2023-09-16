@@ -18,7 +18,7 @@ myImg['red'].src = './img/red.png';
 
 let Row = 7;
 let Col = 5;
-const Bsize = 50;
+let Bsize = 50;
 
 class Block {
     constructor(
@@ -55,9 +55,9 @@ class Block {
         c.strokeRect(this.position.x, this.position.y, Bsize, Bsize);
         c.stroke();
 
-        c.strokeStyle = 'black';
-        c.font = '20px Courier New';
-        c.strokeText(this.str, this.position.x + 10, this.position.y + 30);
+        // c.strokeStyle = 'black';
+        // c.font = '20px Courier New';
+        // c.strokeText(this.str, this.position.x + 10, this.position.y + 30);
         c.restore();
     }
     onClick() {
@@ -67,11 +67,22 @@ class Block {
 
 let arrBlocks = [];
 
+function changeSizeBoard(){
+    init();
+}
+
 function init() {
+    canMove = [];
+    numPath = [];
+    numBlock = 0;
+    ck_c = [];
+    doneDfs = false;
     path = {};
+    numCalc = 0;
     arrBlocks = [];
     Row = document.getElementById('row').value;
     Col = document.getElementById('col').value;
+    Bsize = parseInt(document.getElementById('bsize').value);
     canvas.width = Col * Bsize;
     canvas.height = Row * Bsize;
     for (let i = 0; i < canvas.height; i += Bsize) {
@@ -163,8 +174,8 @@ let ay = [-1, 1, 0, 0];
 let canMove = [];
 let numPath = [];
 let numBlock = 0;
-let path = {}
-
+let path = {};
+let numCalc = 0;
 
 function prepare() {
     canMove = [];
@@ -173,6 +184,7 @@ function prepare() {
     ck_c = [];
     doneDfs = false;
     path = {};
+    numCalc = 0;
 
     for (let i = 0; i < Row; ++i) {
         let cm1 = [];
@@ -196,12 +208,18 @@ function prepare() {
     }
 }
 function dfs(u, step, pu) {
+    ++numCalc;
     numPath[u.x][u.y] = step;
     if (step == numBlock) {
         throw 'hetcuu';
     }
-    if (!check_can_solve()) {
+    if(!check_can_solve2()){
         return;
+    }
+    if(step % 2){
+        if (!check_can_solve()) {
+            return;
+        }
     }
     for (let i = 0; i < 4; ++i) {
         let v = {
@@ -229,7 +247,7 @@ function RunDfs() {
                 path[numPath[i][j]] = {x: arrBlocks[i][j].position.x, y: arrBlocks[i][j].position.y};
             }
         }
-        // console.log(path);
+        console.log(numCalc);
     }
 }
 // Check can Solve
@@ -238,6 +256,7 @@ let co = 0;
 let num_c = 0;
 
 function dfs_c(x, y) {
+    ++numCalc;
     ++num_c;
     ck_c[x][y] = co;
     for (let i = 0; i < 4; ++i) {
@@ -265,6 +284,28 @@ function check_can_solve() {
                 return num_c == containBlock;
             }
         }
+}
+
+function check_can_solve2(){
+    let res = 0;
+    for(let i = 0; i < Row; ++i)
+    for(let j = 0; j < Col; ++j){
+        if(!canMove[i][j] || numPath[i][j])continue;
+        let re = 0;
+        for(let k = 0; k < 4; ++k){
+            let x = i + ax[k];
+            let y = j + ay[k];
+            if(x < 0 || x >= Row || y < 0 || y >= Col){
+                ++re;
+            }
+            else if((numPath[x][y] > 0 || !canMove[x][y]) 
+                // && ({x: x, y: y} != st)
+            )++re;
+            if(re >= 3)++res;
+            if(res > 2)return 0;
+        }
+        return 1;
+    }
 }
 
 init();

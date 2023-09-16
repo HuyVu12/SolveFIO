@@ -17,6 +17,7 @@
             background: url('./img/1325254.png');
             background-size: auto;
             background-position: 50% 50%;
+            user-select: none;
         }
         canvas{
             border: 3px solid rgb(24, 24, 24);
@@ -26,6 +27,7 @@
             transform: translate(-50%, -50%);
         }
         #tabbleControls td{
+            background-color: rgba(240, 248, 255, 0.7);
             padding: 5px;
         }
         #tabbleControls{
@@ -34,7 +36,7 @@
             border: 2px solid black;
         }
         #tabbleControls td{
-            border: 3px solid black;
+            border: 2px solid black;
         }
         #tabbleControls #row,
         #tabbleControls #col{
@@ -49,19 +51,23 @@
     <canvas></canvas>
     <table id="tabbleControls" border="2px">
         <thead>
-            <td colspan="2"><h3>Menu Controls</h3></td>
+            <td colspan="3"><h3>Menu Controls</h3></td>
         </thead>
         <tbody>
             <tr>
                 <td><label for="row">Số hàng</label></td>
                 <td><label for="col">Số cột</label></td>
+                <td><label for="bsize">Kích thước</label></td>
             </tr>
             <tr>
-                <td><input type="number" name="row" id="row" value="5"></td>
-                <td><input type="number" name="col" id="col" value="5"></td>
+                <td><input type="number" name="row" id="row" value="5" onchange="changeSizeBoard()"></td>
+                <td><input type="number" name="col" id="col" value="5" onchange="changeSizeBoard()"></td>
+                <!-- <td><input type="number" name="bsize" id="bsize" value="50" onchange="changeSizeBoard()"></td> -->
+                <td><input type="range" name="bsize" id="bsize" value="50" onchange="changeSizeBoard()" max="200" min="20"></td>
+                
             </tr>
             <tr>
-                <td><input type="button" value="Create" onclick="init()"></td>
+                <td colspan="2"><input type="button" value="Create" onclick="init()"></td>
                 <td><input type="button" value="Run" onclick="RunDfs()"></td>
             </tr>
         </tbody>

@@ -67,6 +67,12 @@ class Block {
 
 let arrBlocks = [];
 
+function changeBackground(value){
+    console.log(value);
+    document.querySelector('body').style.background = value;
+    document.querySelector('body').style.backgroundSize = 'cover';
+}
+
 function changeSizeBoard(){
     init();
 }

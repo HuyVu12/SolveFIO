@@ -13,14 +13,12 @@
             font-weight: 500;
         }
         body{
-            /* background-color: rgb(202, 202, 202); */
             background: url('./img/1325254.png');
-            background-size: auto;
-            background-position: 50% 50%;
+            background-size: cover;
             user-select: none;
         }
         canvas{
-            border: 3px solid rgb(24, 24, 24);
+            border: 3px solid rgb(65, 65, 65);
             position: absolute;
             top: 50%;
             left: 50%;
@@ -62,9 +60,12 @@
             <tr>
                 <td><input type="number" name="row" id="row" value="5" onchange="changeSizeBoard()"></td>
                 <td><input type="number" name="col" id="col" value="5" onchange="changeSizeBoard()"></td>
-                <!-- <td><input type="number" name="bsize" id="bsize" value="50" onchange="changeSizeBoard()"></td> -->
                 <td><input type="range" name="bsize" id="bsize" value="50" onchange="changeSizeBoard()" max="200" min="20"></td>
-                
+            </tr>
+            <tr>
+                <td><p>Background</p></td>
+                <td><input type="color" name="" id="bgColor" onchange="changeBackground(document.getElementById('bgColor').value)"></td>
+                <td><input type="button" value="Reset Background" onclick="changeBackground(`url('./img/1325254.png')`)"></td>
             </tr>
             <tr>
                 <td colspan="2"><input type="button" value="Create" onclick="init()"></td>
